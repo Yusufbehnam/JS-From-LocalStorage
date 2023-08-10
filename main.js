@@ -1,17 +1,37 @@
 const hexInputContainer = document.querySelector("#hexInputContainer")
+const hexForm = document.querySelector("#hexColorForm")
+const addNew = document.querySelector("#addNew")
 
-const newDivElement = document.createElement("div")
+let counter = 1
+
+addNew.addEventListener("click" , () => {
+    // console.log("Click")
+    counter += 1
+    hexInputContainer.append( newHexColorInput(counter) )
+    
+})
+
+function newHexColorInput (itemCount){
+    const newDivElement = document.createElement("div")
 
 newDivElement.classList.add("col-sm")
 
 newDivElement.innerHTML = `
-    <label for="color" class="form-label">HEX Color</label>
+    <label for="colorInput-${itemCount}" class="form-label">HEX Color</label>
     <input
+    id="colorInput-${itemCount}"
     type="text"
-    minlength="6"
-    maxlength="6"
+    minlength="7"
+    maxlength="7"
     class="form-control"
-    name="color1"
+    name="color-${itemCount}"
     />
 `
-hexInputContainer.append(newDivElement)
+return newDivElement
+}
+
+hexInputContainer.append(newHexColorInput(counter))
+
+hexForm.addEventListener("submit", (event) =>{
+    event.preventDefault()
+})
